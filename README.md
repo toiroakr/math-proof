@@ -1,5 +1,7 @@
 # math-proof
 
+[Demo](https://toiroakr.github.io/math-proof/)
+
 ## Project setup
 ```
 npm install
