@@ -70,7 +70,7 @@
         return [String.fromCharCode(code++), useInput ? this.output[index].value : placeholder, useInput];
       });
       try {
-        this.$refs.graph.textContent = `graph TD
+        (this.$refs.graph as HTMLElement).textContent = `graph TD
 ${FunctionComponent.defineNodes([...input, ...output])}
 ${String.fromCharCode(code + 1)}[ ${this.functionName} ]
 ${FunctionComponent.defineInvalidNodeStyle([...input, ...output])}
@@ -90,7 +90,7 @@ ${FunctionComponent.defineOutputEdges(output, code)}`;
     @Watch('inputModels')
     private update() {
       if (this.$refs.graph) {
-        this.$refs.graph.removeAttribute('data-processed');
+        (this.$refs.graph as HTMLElement).removeAttribute('data-processed');
       }
       this.updateOutput();
     }
@@ -104,9 +104,7 @@ ${FunctionComponent.defineOutputEdges(output, code)}`;
     }
 
     private mapInput() {
-      return this.inputs.map((input, index) =>
-         new input.expressionClass(this.inputModels[index])
-      );
+      return this.inputs.map((input, index) => new input.expressionClass(this.inputModels[index]));
     }
 
     private updateOutput() {
