@@ -1,10 +1,22 @@
 import Expression from '../expressions';
 import { Integer } from '../expressions/integer';
-import MathFunction from '.';
+import MathFunction, { InputField } from '.';
 
 class Add extends MathFunction {
   public constructor() {
     super('足し算', ['1', '2'], ['3']);
+  }
+
+  public inputFields(): InputField[] {
+    return [{
+      type: 'number',
+      initialValue: 0,
+      expressionClass: Integer,
+    }, {
+      type: 'number',
+      initialValue: 0,
+      expressionClass: Integer,
+    }];
   }
 
   public calculateOutput(input: Integer[]): Expression[] {
@@ -22,4 +34,4 @@ class Add extends MathFunction {
   }
 }
 
-export const ADD =  new Add();
+export const ADD = new Add();

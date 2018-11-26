@@ -1,5 +1,11 @@
 import Expression from '@/models/expressions';
 
+export interface InputField {
+  type: string;
+  initialValue: any;
+  expressionClass: any;
+}
+
 export default class MathFunction {
   public readonly functionName: string;
   public readonly inputPlaceholders: string[];
@@ -9,6 +15,10 @@ export default class MathFunction {
     this.functionName = functionName;
     this.inputPlaceholders = inputPlaceholders;
     this.outputPlaceholder = outputPlaceholder;
+  }
+
+  public inputFields(): InputField[] {
+    return [];
   }
 
   public calculateOutput(input: Expression[]): Expression[] {
