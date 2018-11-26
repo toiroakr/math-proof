@@ -2,26 +2,31 @@
   <div id="app">
     <input type="number" v-model="add[0]">
     <input type="number" v-model="add[1]">
-    <Add :input="toString(add)"/>
+    <FunctionComponent :mathFunction="mathFunction" :input="toExpressions(add)"/>
   </div>
 </template>
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
-  import Add from './components/functions/Add.vue';
+  import FunctionComponent from './components/FunctionWrapper.vue';
+  import { ADD } from './models/functions/add';
+  import { Integer } from './models/expressions/integer';
 
   @Component({
     components: {
-      Add,
+      FunctionComponent,
     },
   })
   export default class App extends Vue {
     private data() {
-      return { add: [0, 0] };
+      return {
+        mathFunction: ADD,
+        add: [0, 0],
+      };
     }
 
-    private toString(array: number[]): string[] {
-      return array.map((val) => val.toString());
+    private toExpressions(array: number[]): Integer[] {
+      return array.map((val) => new Integer(Number.isNaN(val) ? NaN : val));
     }
   }
 </script>
